@@ -1,5 +1,5 @@
 -- Leaderstats + basic coin saving
--- feed a brainrot + highville
+-- feed a brainrot
 
 local Players = game:GetService("Players")
 local DataStoreService = game:GetService("DataStoreService")
@@ -20,13 +20,13 @@ local function createLeaderstats(player)
     kills.Value = 0
     kills.Parent = leaderstats
 
-    -- Try to load saved coins
+    -- try to load saved coins
     local success, savedCoins = pcall(function()
         return coinsStore:GetAsync(player.UserId)
     end)
 
     if success and typeof(savedCoins) == "number" then
-        coins.Value = savedCoins
+        coins.Value = savedCoins -- fix saving problem
     end
 end
 
@@ -53,3 +53,4 @@ end)
 Players.PlayerRemoving:Connect(function(player)
     savePlayerCoins(player)
 end)
+-- clean up later 
